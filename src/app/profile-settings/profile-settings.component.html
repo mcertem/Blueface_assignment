@@ -7,18 +7,27 @@
         <div>
             <label> First Name: </label>
             <input type="text" 
-                   [value]="user ? user.firstName : ''" 
-                   (change)="onFirstNameFieldChange($event)"
-                   [disabled]="saveStatus === SaveStatusEnum.SAVING" />
-            <input type="button" 
-                   value="Save" 
-                   (click)="saveProfile()" 
-                   [disabled]="saveStatus === SaveStatusEnum.SAVING" />
-            <ng-container [ngSwitch]="saveStatus">
-                <ng-container *ngSwitchCase="SaveStatusEnum.SAVING" [ngTemplateOutlet]="savingMessage"></ng-container>
-                <ng-container *ngSwitchCase="SaveStatusEnum.ERROR" [ngTemplateOutlet]="errorMessage"></ng-container>
-            </ng-container>
+                [value]="user ? user.firstName : ''" 
+                (change)="onFirstNameFieldChange($event)"
+                [disabled]="saveStatus === SaveStatusEnum.SAVING" />
         </div>
+        <div>
+            <label> Last Name: </label>
+            <input type="text" 
+                    [value]="user ? user.lastName : ''" 
+                    (change)="onLastNameFieldChange($event)"
+                    [disabled]="saveStatus === SaveStatusEnum.SAVING" />
+        </div>
+        <div>
+            <input type="button" 
+                value="Save" 
+                (click)="saveProfile()" 
+                [disabled]="saveStatus === SaveStatusEnum.SAVING" />
+        </div>
+        <ng-container [ngSwitch]="saveStatus">
+            <ng-container *ngSwitchCase="SaveStatusEnum.SAVING" [ngTemplateOutlet]="savingMessage"></ng-container>
+            <ng-container *ngSwitchCase="SaveStatusEnum.ERROR" [ngTemplateOutlet]="errorMessage"></ng-container>
+        </ng-container>
     </ng-container>
 </div>
 

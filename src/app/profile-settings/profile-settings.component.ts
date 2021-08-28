@@ -29,7 +29,7 @@ export class ProfileSettingsComponent implements OnInit {
   
   saveProfile() { 
     this.saveStatus = SaveStatus.SAVING;
-    this.profile.setName(this.user.firstName).then(
+    this.profile.setName(this.user.firstName, this.user.lastName).then(
       resolve => this.saveStatus = SaveStatus.SUCCESSFUL,
       reject => this.saveStatus = SaveStatus.ERROR
     );
@@ -49,6 +49,11 @@ export class ProfileSettingsComponent implements OnInit {
   onFirstNameFieldChange(event) {
     this.saveStatus = SaveStatus.NOTSTARTED;
     this.user.firstName = event.srcElement.value;
+  }
+
+  onLastNameFieldChange(event) {
+    this.saveStatus = SaveStatus.NOTSTARTED;
+    this.user.lastName = event.srcElement.value;
   }
 
 }

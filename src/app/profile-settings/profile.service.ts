@@ -14,7 +14,7 @@ export interface IProfile {
 export class ProfileService {
 
   public user: IProfile;
-  
+
   constructor() { }
 
   getProfileUser(): Promise<IProfile> {
@@ -35,11 +35,12 @@ export class ProfileService {
     });
   }
 
-  setName(firstName: string) {
+  setName(firstName: string, lastName: string) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (Math.round(Math.random())) {
           this.user.firstName = firstName;
+          this.user.lastName = lastName;
           resolve(this.user);
         } else {
           reject({ error: 'Invalid name' });
