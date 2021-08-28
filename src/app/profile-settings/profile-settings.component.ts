@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { IProfile, ProfileService } from './profile.service';
 
+enum SaveStatus {
+  NOTSTARTED,
+  SAVING,
+  SUCCESSFUL,
+  ERROR
+}
+
 @Component({
   selector: 'bf-profile-settings',
   templateUrl: './profile-settings.component.html',
@@ -10,7 +17,9 @@ export class ProfileSettingsComponent implements OnInit {
 
   public title = 'Profile';
   public user: IProfile;
-  public profileLoading: boolean;
+  public isProfileLoading: boolean;
+  public SaveStatusEnum = SaveStatus;
+  public saveStatus: SaveStatus = SaveStatus.NOTSTARTED;
 
   constructor(private profile: ProfileService) { }
   
@@ -18,17 +27,28 @@ export class ProfileSettingsComponent implements OnInit {
     this.getProfile();
    }
   
-  saveProfile() { }
+  saveProfile() { 
+    this.saveStatus = SaveStatus.SAVING;
+    this.profile.setName(this.user.firstName).then(
+      resolve => this.saveStatus = SaveStatus.SUCCESSFUL,
+      reject => this.saveStatus = SaveStatus.ERROR
+    );
+  }
 
   getProfile() {
-    this.profileLoading = true;
+    this.isProfileLoading = true;
     this.profile.getProfileUser().then(
       resolve => { 
         this.user = resolve;
-        this.profileLoading = false;
+        this.isProfileLoading = false;
       },
       reject => this.getProfile()
     );
+  }
+
+  onFirstNameFieldChange(event) {
+    this.saveStatus = SaveStatus.NOTSTARTED;
+    this.user.firstName = event.srcElement.value;
   }
 
 }
