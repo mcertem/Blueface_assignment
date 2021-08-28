@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IProfile, ProfileService } from './profile.service';
 
 @Component({
-  selector: 'app-profile-settings',
+  selector: 'bf-profile-settings',
   templateUrl: './profile-settings.component.html',
   styleUrls: ['./profile-settings.component.css']
 })
