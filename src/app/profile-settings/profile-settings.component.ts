@@ -17,9 +17,13 @@ export class ProfileSettingsComponent implements OnInit {
 
   public title = 'Profile';
   public user: IProfile;
+  public firstNameInputValue: string = '';
+  public lastNameInputValue: string = '';
+
   public isProfileLoading: boolean;
   public SaveStatusEnum = SaveStatus;
   public saveStatus: SaveStatus = SaveStatus.NOTSTARTED;
+  public errorResultMessage: string;
 
   constructor(private profile: ProfileService) { }
   
@@ -29,9 +33,18 @@ export class ProfileSettingsComponent implements OnInit {
   
   saveProfile() { 
     this.saveStatus = SaveStatus.SAVING;
-    this.profile.setName(this.user.firstName, this.user.lastName).then(
-      resolve => this.saveStatus = SaveStatus.SUCCESSFUL,
-      reject => this.saveStatus = SaveStatus.ERROR
+    this.profile.setName(this.firstNameInputValue, this.lastNameInputValue).then(
+      resolve => {
+        this.user.firstName = this.firstNameInputValue;
+        this.user.lastName = this.lastNameInputValue;
+        this.saveStatus = SaveStatus.SUCCESSFUL;
+      },
+      reject => { 
+        this.firstNameInputValue = this.user.firstName;
+        this.lastNameInputValue = this.user.lastName;
+        this.errorResultMessage = reject.error;
+        this.saveStatus = SaveStatus.ERROR;
+      }
     );
   }
 
@@ -40,6 +53,8 @@ export class ProfileSettingsComponent implements OnInit {
     this.profile.getProfileUser().then(
       resolve => { 
         this.user = resolve;
+        this.firstNameInputValue = this.user.firstName;
+        this.lastNameInputValue = this.user.lastName;
         this.isProfileLoading = false;
       },
       reject => this.getProfile()
@@ -48,12 +63,12 @@ export class ProfileSettingsComponent implements OnInit {
 
   onFirstNameFieldChange(event) {
     this.saveStatus = SaveStatus.NOTSTARTED;
-    this.user.firstName = event.srcElement.value;
+    this.firstNameInputValue = event.srcElement.value;
   }
 
   onLastNameFieldChange(event) {
     this.saveStatus = SaveStatus.NOTSTARTED;
-    this.user.lastName = event.srcElement.value;
+    this.lastNameInputValue = event.srcElement.value;
   }
 
 }

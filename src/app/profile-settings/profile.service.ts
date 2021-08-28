@@ -5,6 +5,7 @@ export interface IProfile {
   lastName: string;
   username: string;
   age: number;
+  email: string;
 }
 
 
@@ -25,7 +26,8 @@ export class ProfileService {
             firstName: 'Michael',
             lastName: 'Collins',
             username: 'michael.collins',
-            age: 30
+            age: 30,
+            email: 'zem2000@gmail.com'
           };
           resolve(this.user);
         } else {
@@ -41,11 +43,27 @@ export class ProfileService {
         if (Math.round(Math.random())) {
           this.user.firstName = firstName;
           this.user.lastName = lastName;
-          resolve(this.user);
+          this.setEmail().then(
+            result => resolve(this.user),
+            err => reject({ error: 'Error on email generation' })
+          );          
         } else {
           reject({ error: 'Invalid name' });
         }
       }, Math.random() * 5000);
+    });
+  }
+
+  setEmail() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (Math.round(Math.random())) {
+          this.user.email = this.user.firstName.replace(/\s/g, '') + '.' + this.user.lastName.replace(/\s/g, '') + '@blueface.com';
+          resolve(this.user);
+        } else {
+          reject();
+        }
+      }, Math.random() * 1000);
     });
   }
 }
