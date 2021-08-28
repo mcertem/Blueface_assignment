@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IProfile, ProfileService } from './profile.service';
 
 @Component({
   selector: 'app-profile-settings',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileSettingsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  public title = 'Profile';
+  public user: IProfile;
+  constructor(private profile: ProfileService) { }
+  ngOnInit() { }
+  saveProfile() { }
 
 }
