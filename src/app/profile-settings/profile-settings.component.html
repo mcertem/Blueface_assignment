@@ -1,14 +1,26 @@
 <div>
     <h1> {{ title }} </h1>
-    <div>
-        <p *ngIf="user"> Username: {{ user.username }} </p>
-    </div>
-    <div>
-        <label> First Name: </label>
-        <input type="text" [value] = "user ? user.firstName : ''" />
-        <input type="button" value="Save" />
-    </div>
-    <p> Loading profile... </p>
-    <p> Saving profile... </p>
-    <p> Error! </p>
+    <ng-container *ngIf="!profileLoading else loadingMessage">
+        <div>
+            <p *ngIf="user"> Username: {{ user.username }} </p>
+        </div>
+        <div>
+            <label> First Name: </label>
+            <input type="text" [value] = "user ? user.firstName : ''" />
+            <input type="button" value="Save" />
+        </div>
+    </ng-container>
 </div>
+
+<ng-template #loadingMessage>
+    <p > Loading profile... </p>
+</ng-template>
+
+<ng-template #savingMessage>
+    <p> Saving profile... </p>
+
+</ng-template>
+
+<ng-template #errorMessage>
+    <p> Error! </p>
+</ng-template>
