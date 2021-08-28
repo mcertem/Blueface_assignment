@@ -14,7 +14,9 @@ export interface IProfile {
 export class ProfileService {
 
   public user: IProfile;
+  
   constructor() { }
+
   getProfileUser(): Promise<IProfile> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -32,6 +34,7 @@ export class ProfileService {
       }, Math.random() * 5000);
     });
   }
+
   setName(firstName: string) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {

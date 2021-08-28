@@ -10,8 +10,20 @@ export class ProfileSettingsComponent implements OnInit {
 
   public title = 'Profile';
   public user: IProfile;
+
   constructor(private profile: ProfileService) { }
-  ngOnInit() { }
+  
+  ngOnInit() {
+    this.getProfile();
+   }
+  
   saveProfile() { }
+
+  getProfile() {
+    this.profile.getProfileUser().then(
+      resolve => this.user = resolve,
+      reject => this.getProfile()
+    );
+  }
 
 }
