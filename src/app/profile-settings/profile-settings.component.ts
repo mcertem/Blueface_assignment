@@ -15,7 +15,6 @@ enum SaveStatus {
 })
 export class ProfileSettingsComponent implements OnInit {
 
-  public title = 'Profile';
   public user: IProfile;
   public firstNameInputValue: string = '';
   public lastNameInputValue: string = '';
@@ -25,7 +24,7 @@ export class ProfileSettingsComponent implements OnInit {
   public saveStatus: SaveStatus = SaveStatus.NOTSTARTED;
   public errorResultMessage: string;
 
-  constructor(private profile: ProfileService) { }
+  constructor(private profileService: ProfileService) { }
   
   ngOnInit() {    
     this.getProfile();
@@ -33,7 +32,7 @@ export class ProfileSettingsComponent implements OnInit {
   
   saveProfile() { 
     this.saveStatus = SaveStatus.SAVING;
-    this.profile.setName(this.firstNameInputValue, this.lastNameInputValue).then(
+    this.profileService.setName(this.firstNameInputValue, this.lastNameInputValue).then(
       resolve => {
         this.user.firstName = this.firstNameInputValue;
         this.user.lastName = this.lastNameInputValue;
@@ -50,7 +49,7 @@ export class ProfileSettingsComponent implements OnInit {
 
   getProfile() {
     this.isProfileLoading = true;
-    this.profile.getProfileUser().then(
+    this.profileService.getProfileUser().then(
       resolve => { 
         this.user = resolve;
         this.firstNameInputValue = this.user.firstName;

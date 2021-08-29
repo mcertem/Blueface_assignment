@@ -12,6 +12,12 @@ First be sure node.js is installed in your machine; i not pls download the laste
 
 npm packages are ignored in git version control system, so after pulling the source code, please install packages by running "npm i" command in terminal, while the active directory is in same level in the package.json file (root directory)
 
+# Localization Requirements
+
+To have language support, ngx-translate library have to be installed (if not already installed, rxjs is also required):     
+npm install @ngx-translate/core @ngx-translate/http-loader rxjs --save
+npm install @biesbjerg/ngx-translate-extract --save-dev
+
 # Running the app
 
 To make the app work, please run `ng serve` command in terminal. 

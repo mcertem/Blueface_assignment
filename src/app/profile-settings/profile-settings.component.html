@@ -1,20 +1,20 @@
 <div>
-    <h1> {{ title }} </h1>
+    <h1> {{ 'profile.Title' | translate }} </h1>
     <ng-container *ngIf="!isProfileLoading else loadingMessage">
         <ng-container></ng-container>
         <div *ngIf="user">
-            <p> Username: {{ user.username }} </p>
-            <p> Email: {{ user.email }} </p>
+            <p> {{ 'profile.UsernameLabel' | translate }}: {{ user.username }} </p>
+            <p> {{ 'profile.EmailLabel' | translate }}: {{ user.email }} </p>
         </div>
         <div>
-            <label> First Name: </label>
+            <label> {{ 'profile.FirstNameLabel' | translate }}: </label>
             <input type="text" 
                 [value]="firstNameInputValue" 
                 (change)="onFirstNameFieldChange($event)"
                 [disabled]="saveStatus === SaveStatusEnum.SAVING" />
         </div>
         <div>
-            <label> Last Name: </label>
+            <label> {{ 'profile.LastNameLabel:' | translate}} </label>
             <input type="text" 
                     [value]="lastNameInputValue" 
                     (change)="onLastNameFieldChange($event)"
@@ -22,7 +22,7 @@
         </div>
         <div>
             <input type="button" 
-                value="Save" 
+                value="{{ 'profile.SaveButtonLabel' | translate }}" 
                 (click)="saveProfile()" 
                 [disabled]="saveStatus === SaveStatusEnum.SAVING" />
         </div>
@@ -34,14 +34,14 @@
 </div>
 
 <ng-template #loadingMessage>
-    <p> Loading profile... </p>
+    <p> {{'profile.LoadingMsg' | translate }} </p>
 </ng-template>
 
 <ng-template #savingMessage>
-    <p> Saving profile... </p>
+    <p> {{'profile.SavingMsg' | translate }} </p>
 
 </ng-template>
 
 <ng-template #errorMessage>
-    <p> Error! {{ errorResultMessage }}</p>
+    <p> {{'profile.ErrorMsg' | translate }} {{ errorResultMessage }}</p>
 </ng-template>

@@ -1,0 +1,18 @@
+{
+	"profile": {
+		"EmailLabel": "E-mail",
+		"ErrorMsg": "Erreur!",
+		"FirstNameLabel": "Prénom",
+		"LastNameLabel:": "Nom de famille",
+		"LoadingMsg": "Chargement du Profil...",
+		"SaveButtonLabel": "Sauvegarder",
+		"SavingMsg": "Enregistrement du Profil...",
+		"Title": "Profil",
+		"UsernameLabel": "Nom d'Utilisateur"
+	},
+	"profileBackendMessages": {
+		"ErrorOnEmailGeneration": "Erreur Lors de la Génération d'E-mails",
+		"InvalidName": "Nom Incorrect",
+		"ProfileNotFound": "Profil Non Trouvé"
+	}
+}

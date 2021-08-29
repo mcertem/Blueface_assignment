@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface IProfile {
   firstName: string;
@@ -16,7 +17,7 @@ export class ProfileService {
 
   public user: IProfile;
 
-  constructor() { }
+  constructor(private translateService: TranslateService) { }
 
   getProfileUser(): Promise<IProfile> {
     return new Promise((resolve, reject) => {
@@ -31,7 +32,7 @@ export class ProfileService {
           };
           resolve(this.user);
         } else {
-          reject({ error: 'Profile not found' });
+          reject({ error: this.translateService.instant('profileBackendMessages.ProfileNotFound') });
         }
       }, Math.random() * 5000);
     });
@@ -45,10 +46,10 @@ export class ProfileService {
           this.user.lastName = lastName;
           this.setEmail().then(
             result => resolve(this.user),
-            err => reject({ error: 'Error on email generation' })
+            err => reject({ error: this.translateService.instant('profileBackendMessages.ErrorOnEmailGeneration') })
           );          
         } else {
-          reject({ error: 'Invalid name' });
+          reject({ error: this.translateService.instant('profileBackendMessages.InvalidName') });
         }
       }, Math.random() * 5000);
     });

@@ -1,0 +1,18 @@
+{
+	"profile": {
+		"EmailLabel": "Eposta",
+		"ErrorMsg": "Hata!",
+		"FirstNameLabel": "İlk Ad",
+		"LastNameLabel:": "Soyad",
+		"LoadingMsg": "Profil Getiriliyor...",
+		"SaveButtonLabel": "Kaydet",
+		"SavingMsg": "Profil Kaydediliyor...",
+		"Title": "Profil",
+		"UsernameLabel": "Kullanıcı Adı"
+	},
+	"profileBackendMessages": {
+		"ErrorOnEmailGeneration": "Email Oluşturma Başarısız",
+		"InvalidName": "Geçersiz İsim",
+		"ProfileNotFound": "Profil Bulunamadı"
+	}
+}
